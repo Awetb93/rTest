@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import Header from "./components/header/index";
+import Headline from "./components/headline/index";
+import "./app.scss";
 function App() {
+  const tempArr = [
+    {
+      fname: "Awet",
+      lname: "Ghirmay",
+      email: "Awetb61@gmail.com",
+      age: 24,
+      onlineStatus: true,
+    },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <section className="main">
+        <Headline
+          header="Posts"
+          desc="Click the button to render the page"
+          tempArr={tempArr}
+        />
+      </section>
     </div>
   );
 }
