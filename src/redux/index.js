@@ -4,7 +4,7 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import Axios from "axios";
-export const fetch = createAsyncThunk("fetch/Posts", async () => {
+export const fetch = createAsyncThunk("fetch/Posts", async (id, thunkApi) => {
   const posts = await Axios.get("https://jsonplaceholder.typicode.com/posts");
   return posts.data;
 });
