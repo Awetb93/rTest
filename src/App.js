@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./components/header/index";
 import Headline from "./components/headline/index";
+import SharedButton from "./button/index";
+import ListItem from "./components/listItem/index";
 import { fetch } from "./redux/index";
 import { useDispatch, useSelector } from "react-redux";
 import "./app.scss";
+
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetch());
-  }, [dispatch]);
+
   const list = useSelector(state => state);
   console.log(list);
+  if (list.posts) {
+    console.log(list.posts.length);
+  }
+
   const tempArr = [
     {
       fname: "Awet",
@@ -20,6 +25,13 @@ function App() {
       onlineStatus: true,
     },
   ];
+  const fetchPost = () => {
+    dispatch(fetch());
+  };
+  const configButton = {
+    buttonText: "Get Post",
+    emitEvent: fetchPost,
+  };
 
   return (
     <div className="App">
@@ -30,6 +42,17 @@ function App() {
           desc="Click the button to render the page"
           tempArr={tempArr}
         />
+        <SharedButton {...configButton} />
+        {list.posts && (
+          <div>
+            {list.posts.map((post, index) => {
+              console.log(post);
+              const { title, body } = post;
+              const configItem = { title, desc: body };
+              return <ListItem key={index} {...configItem} />;
+            })}
+          </div>
+        )}
       </section>
     </div>
   );

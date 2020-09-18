@@ -5,7 +5,11 @@ import {
 } from "@reduxjs/toolkit";
 import Axios from "axios";
 export const fetch = createAsyncThunk("fetch/Posts", async (id, thunkApi) => {
-  const posts = await Axios.get("https://jsonplaceholder.typicode.com/posts");
+  const posts = await Axios.get("https://jsonplaceholder.typicode.com/posts", {
+    params: {
+      _limit: 5,
+    },
+  });
   return posts.data;
 });
 const postSlice = createSlice({
